@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agromett - Dashboard Cuaca Pertanian</title>
+    <link rel="icon" type="image/png" href="image/logo1x1.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-cloud-sun-rain"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Agromett</h1>
+                    <span>Smart Farming Solution</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <div class="sync-indicator" id="sync-indicator">
+                    <i class="fas fa-sync-alt" id="sync-btn"></i>
+                    <span class="sync-status" id="sync-status">Disinkronisasi</span>
+                </div>
+                <div class="weather-station">
+                    <i class="fas fa-satellite-dish"></i>
+                    <span>Stasiun Utama</span>
+                </div>
+            </div>
+        </header>
+        
+        <div class="weather-alert" id="weather-alert">
+            <div class="alert-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div class="alert-content">
+                <strong>Peringatan Cuaca Ekstrem</strong>
+                <p>Hujan lebat diperkirakan terjadi dalam 2 jam. Segera lakukan tindakan pencegahan.</p>
+            </div>
+            <button class="alert-close" id="close-alert">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <main>
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="section active">
+                <div class="section-header">
+                    <h2>Dashboard Cuaca Real-Time</h2>
+                    <div class="last-update">
+                        <i class="fas fa-clock"></i>
+                        <span id="last-update">Diperbarui: 10:30 WIB</span>
+                    </div>
+                </div>
+                
+                <div class="weather-grid">
+                    <div class="weather-card temperature">
+                        <div class="weather-card-header">
+                            <div class="weather-icon">
+                                <i class="fas fa-thermometer-half"></i>
+                            </div>
+                            <div class="weather-trend up">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>2°</span>
+                            </div>
+                        </div>
+                        <div class="weather-value">28°C</div>
+                        <div class="weather-label">Suhu</div>
+                        <div class="weather-detail">Terasa seperti 30°C</div>
+                    </div>
+                    
+                    <div class="weather-card humidity">
+                        <div class="weather-card-header">
+                            <div class="weather-icon">
+                                <i class="fas fa-tint"></i>
+                            </div>
+                            <div class="weather-trend down">
+                                <i class="fas fa-arrow-down"></i>
+                                <span>5%</span>
+                            </div>
+                        </div>
+                        <div class="weather-value">75%</div>
+                        <div class="weather-label">Kelembaban</div>
+                        <div class="weather-detail">Optimal untuk padi</div>
+                    </div>
+                    
+                    <div class="weather-card light">
+                        <div class="weather-card-header">
+                            <div class="weather-icon">
+                                <i class="fas fa-sun"></i>
+                            </div>
+                            <div class="weather-trend up">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>150</span>
+                            </div>
+                        </div>
+                        <div class="weather-value">850 Lux</div>
+                        <div class="weather-label">Intensitas Cahaya</div>
+                        <div class="weather-detail">Cukup cerah</div>
+                    </div>
+                    
+                    <div class="weather-card wind">
+                        <div class="weather-card-header">
+                            <div class="weather-icon">
+                                <i class="fas fa-wind"></i>
+                            </div>
+                            <div class="weather-trend stable">
+                                <i class="fas fa-minus"></i>
+                                <span>0</span>
+                            </div>
+                        </div>
+                        <div class="weather-value">12 km/jam</div>
+                        <div class="weather-label">Kecepatan Angin</div>
+                        <div class="weather-detail">Dari Timur Laut</div>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3>Grafik Cuaca 24 Jam</h3>
+                        <div class="chart-legend">
+                            <div class="legend-item">
+                                <div class="legend-color temp"></div>
+                                <span>Suhu</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color humidity"></div>
+                                <span>Kelembaban</span>
+                            </div>
+                        </div>
+                    </div>
+                    <canvas id="weatherChart"></canvas>
+                </div>
+                
+                <div class="quick-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-cloud-rain"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-value">45%</div>
+                            <div class="stat-label">Peluang Hujan</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-temperature-high"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-value">32°C</div>
+                            <div class="stat-label">Suhu Maksimum</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-value">Optimal</div>
+                            <div class="stat-label">Kondisi Tanam</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <nav>
+            <a href="dashboard.html" class="nav-item active">
+                <div class="nav-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <span>Dashboard</span>
+            </a>
+            <a href="input-data.html" class="nav-item">
+                <div class="nav-icon">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <span>Input Data</span>
+            </a>
+            <a href="ai-rekomendasi.html" class="nav-item">
+                <div class="nav-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <span>AI Rekomendasi</span>
+            </a>
+            <a href="riwayat.html" class="nav-item">
+                <div class="nav-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <span>Riwayat</span>
+            </a>
+            <a href="account.html" class="nav-item">
+                <div class="nav-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <span>Akun</span>
+            </a>
+        </nav>
+        
+        <div class="connection-status" id="connection-status">
+            <i class="fas fa-wifi"></i>
+            <span>Terhubung ke Cloud AGROMETT</span>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module" src="firebase-auth.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
+

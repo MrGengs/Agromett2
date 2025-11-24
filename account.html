@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agromett - Akun Saya</title>
+    <link rel="icon" type="image/png" href="image/logo1x1.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-cloud-sun-rain"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Agromett</h1>
+                    <span>Smart Farming Solution</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <div class="sync-indicator" id="sync-indicator">
+                    <i class="fas fa-sync-alt" id="sync-btn"></i>
+                    <span class="sync-status" id="sync-status">Disinkronisasi</span>
+                </div>
+                <div class="weather-station">
+                    <i class="fas fa-satellite-dish"></i>
+                    <span>Stasiun Utama</span>
+                </div>
+            </div>
+        </header>
+        
+        <main>
+            <!-- Account Section -->
+            <section id="account" class="section active">
+                <div class="section-header">
+                    <h2>Akun Saya</h2>
+                    <p>Kelola informasi akun Anda</p>
+                </div>
+                
+                <div class="account-container">
+                    <div class="account-profile">
+                        <div class="profile-avatar" id="profile-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="profile-info">
+                            <h3 id="profile-name">Loading...</h3>
+                            <p id="profile-email">Loading...</p>
+                            <span class="profile-badge" id="profile-badge">
+                                <i class="fas fa-check-circle"></i>
+                                Terverifikasi
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="account-details">
+                        <div class="detail-card">
+                            <div class="detail-header">
+                                <div class="detail-icon">
+                                    <i class="fas fa-chart-bar"></i>
+                                </div>
+                                <h4>Statistik</h4>
+                            </div>
+                            <div class="detail-content">
+                                <div class="detail-item">
+                                    <span class="detail-label">Total Data Input</span>
+                                    <span class="detail-value">12</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Rekomendasi Diterima</span>
+                                    <span class="detail-value">8</span>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-label">Lahan Terdaftar</span>
+                                    <span class="detail-value">3</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="account-actions">
+                        <button class="action-btn secondary" id="logout-btn">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <nav>
+            <a href="dashboard.html" class="nav-item">
+                <div class="nav-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <span>Dashboard</span>
+            </a>
+            <a href="input-data.html" class="nav-item">
+                <div class="nav-icon">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <span>Input Data</span>
+            </a>
+            <a href="ai-rekomendasi.html" class="nav-item">
+                <div class="nav-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <span>AI Rekomendasi</span>
+            </a>
+            <a href="riwayat.html" class="nav-item">
+                <div class="nav-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <span>Riwayat</span>
+            </a>
+            <a href="account.html" class="nav-item active">
+                <div class="nav-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <span>Akun</span>
+            </a>
+        </nav>
+        
+        <div class="connection-status" id="connection-status">
+            <i class="fas fa-wifi"></i>
+            <span>Terhubung ke Cloud AGROMETT</span>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module" src="firebase-auth.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Account page specific scripts
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Load user data from Firestore (NOT localStorage)
+            try {
+                const { getCurrentUser, getUserFromFirestore } = await import('./firebase-auth.js');
+                const user = await getCurrentUser();
+                
+                if (user) {
+                    // Try to get user data from Firestore first
+                    let userData = null;
+                    try {
+                        userData = await getUserFromFirestore(user.uid);
+                    } catch (error) {
+                        console.log('User data not found in Firestore, using auth data');
+                    }
+                    
+                    // Update profile info from Firestore or Auth
+                    const displayName = userData?.displayName || user.displayName || 'Pengguna';
+                    const email = userData?.email || user.email || '-';
+                    const photoURL = userData?.photoURL || user.photoURL;
+                    
+                    document.getElementById('profile-name').textContent = displayName;
+                    document.getElementById('profile-email').textContent = email;
+                    
+                    // Update avatar if photo exists
+                    if (photoURL) {
+                        const avatar = document.getElementById('profile-avatar');
+                        avatar.innerHTML = `<img src="${photoURL}" alt="Profile">`;
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading user data:', error);
+            }
+            
+            // Logout button
+            const logoutBtn = document.getElementById('logout-btn');
+            logoutBtn.addEventListener('click', async (e) => {
+                e.preventDefault();
+                
+                // Disable button to prevent multiple clicks
+                logoutBtn.disabled = true;
+                logoutBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Keluar...';
+                
+                try {
+                    const { signOut } = await import('./firebase-auth.js');
+                    await signOut();
+                    
+                    // Clear any remaining data
+                    if (typeof Storage !== 'undefined') {
+                        try {
+                            localStorage.clear();
+                            sessionStorage.clear();
+                        } catch (e) {
+                            console.log('Error clearing storage:', e);
+                        }
+                    }
+                    
+                    // Redirect to auth page
+                    window.location.href = 'auth.html';
+                } catch (error) {
+                    console.error('Error during logout:', error);
+                    
+                    // Re-enable button on error
+                    logoutBtn.disabled = false;
+                    logoutBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> Keluar';
+                    
+                    // Show error message
+                    alert('Gagal keluar. Silakan coba lagi.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

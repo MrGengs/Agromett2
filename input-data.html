@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agromett - Input Data Lahan</title>
+    <link rel="icon" type="image/png" href="image/logo1x1.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-cloud-sun-rain"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Agromett</h1>
+                    <span>Smart Farming Solution</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <div class="sync-indicator" id="sync-indicator">
+                    <i class="fas fa-sync-alt" id="sync-btn"></i>
+                    <span class="sync-status" id="sync-status">Disinkronisasi</span>
+                </div>
+                <div class="weather-station">
+                    <i class="fas fa-satellite-dish"></i>
+                    <span>Stasiun Utama</span>
+                </div>
+            </div>
+        </header>
+        
+        <main>
+            <!-- Input Data Section -->
+            <section id="input" class="section active">
+                <div class="section-header">
+                    <h2>Input Data Lahan</h2>
+                    <p>Masukkan data lahan untuk mendapatkan prediksi produktivitas</p>
+                </div>
+                
+                <div class="form-container">
+                    <form id="farm-data-form">
+                        <div class="form-group">
+                            <label for="plant-type" class="form-label">
+                                <i class="fas fa-leaf"></i>
+                                Jenis Tanaman
+                            </label>
+                            <input type="text" id="plant-type" class="form-input" placeholder="Masukkan jenis tanaman" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="land-area" class="form-label">
+                                <i class="fas fa-ruler-combined"></i>
+                                Luas Lahan
+                            </label>
+                            <div class="input-with-unit">
+                                <input type="number" id="land-area" class="form-input" step="0.1" min="0.1" placeholder="0.0" required>
+                                <span class="input-unit">hektar</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="growth-phase" class="form-label">
+                                <i class="fas fa-seedling"></i>
+                                Fase Pertumbuhan
+                            </label>
+                            <select id="growth-phase" class="form-select" required>
+                                <option value="" disabled selected hidden>Pilih Fase Pertumbuhan</option>
+                                <option value="persemaian">Persemaian</option>
+                                <option value="vegetatif">Vegetatif</option>
+                                <option value="generatif">Generatif</option>
+                                <option value="panen">Panen</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="soil-type" class="form-label">
+                                <i class="fas fa-mountain"></i>
+                                Jenis Tanah
+                            </label>
+                            <select id="soil-type" class="form-select" required>
+                                <option value="" disabled selected hidden>Pilih Jenis Tanah</option>
+                                <option value="lempung">Lempung</option>
+                                <option value="berpasir">Berpasir</option>
+                                <option value="liat">Liat</option>
+                                <option value="gambut">Gambut</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-calculator"></i>
+                            Hitung Prediksi
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="prediction-result" id="prediction-result">
+                    <div class="result-header">
+                        <h3>Hasil Prediksi</h3>
+                        <div class="result-actions">
+                            <div class="result-accuracy">
+                                <i class="fas fa-bullseye"></i>
+                                <span>Akurasi: 85%</span>
+                            </div>
+                            <button type="button" class="save-btn" aria-label="Simpan hasil prediksi">
+                                <i class="fas fa-save"></i>
+                                Simpan
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="result-grid">
+                        <div class="result-card">
+                            <div class="result-icon">
+                                <i class="fas fa-weight-hanging"></i>
+                            </div>
+                            <div class="result-content">
+                                <div class="result-value" id="productivity-estimate">-</div>
+                                <div class="result-label">Produktivitas Estimasi</div>
+                            </div>
+                        </div>
+                        
+                        <div class="result-card">
+                            <div class="result-icon">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <div class="result-content">
+                                <div class="result-value" id="revenue-estimate">-</div>
+                                <div class="result-label">Estimasi Pendapatan</div>
+                            </div>
+                        </div>
+                        
+                        <div class="result-card">
+                            <div class="result-icon">
+                                <i class="fas fa-calendar-day"></i>
+                            </div>
+                            <div class="result-content">
+                                <div class="result-value" id="harvest-estimate">-</div>
+                                <div class="result-label">Waktu Panen Estimasi</div>
+                            </div>
+                        </div>
+                        
+                        <div class="result-card">
+                            <div class="result-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <div class="result-content">
+                                <div class="result-value" id="yield-comparison">-</div>
+                                <div class="result-label">Perbandingan Hasil</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <nav>
+            <a href="dashboard.html" class="nav-item">
+                <div class="nav-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <span>Dashboard</span>
+            </a>
+            <a href="input-data.html" class="nav-item active">
+                <div class="nav-icon">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <span>Input Data</span>
+            </a>
+            <a href="ai-rekomendasi.html" class="nav-item">
+                <div class="nav-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <span>AI Rekomendasi</span>
+            </a>
+            <a href="riwayat.html" class="nav-item">
+                <div class="nav-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <span>Riwayat</span>
+            </a>
+            <a href="account.html" class="nav-item">
+                <div class="nav-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <span>Akun</span>
+            </a>
+        </nav>
+        
+        <div class="connection-status" id="connection-status">
+            <i class="fas fa-wifi"></i>
+            <span>Terhubung ke Cloud AGROMETT</span>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module" src="firebase-auth.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
+

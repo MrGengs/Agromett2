@@ -1,0 +1,1518 @@
+:root {
+    --primary: #2e7d32;
+    --primary-light: #4caf50;
+    --primary-dark: #1b5e20;
+    --secondary: #ff9800;
+    --danger: #f44336;
+    --warning: #ffc107;
+    --info: #2196f3;
+    --light: #f8f9fa;
+    --dark: #343a40;
+    --gray: #6c757d;
+    --success: #28a745;
+    
+    --gradient-primary: linear-gradient(135deg, var(--primary), var(--primary-light));
+    --gradient-warning: linear-gradient(135deg, var(--warning), #ffb74d);
+    --gradient-danger: linear-gradient(135deg, var(--danger), #f44336);
+    --gradient-info: linear-gradient(135deg, var(--info), #64b5f6);
+    
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 8px rgba(0,0,0,0.12);
+    --shadow-lg: 0 8px 16px rgba(0,0,0,0.15);
+    --border-radius: 12px;
+    --border-radius-sm: 8px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100vh;
+    overflow-y: auto; /* Allow scrolling but hide scrollbar */
+    overflow-x: auto; /* Keep horizontal scrollbar if needed */
+}
+
+/* Hide vertical scrollbar for all browsers - but keep scrolling functional */
+html {
+    overflow-y: auto !important; /* Allow scrolling */
+    scrollbar-width: none; /* Firefox - hide scrollbar but keep scroll */
+    -ms-overflow-style: none; /* IE and Edge - hide scrollbar but keep scroll */
+}
+
+html::-webkit-scrollbar {
+    width: 0px; /* Hide vertical scrollbar but keep scroll functionality */
+    height: 6px; /* Keep horizontal scrollbar */
+}
+
+html::-webkit-scrollbar:vertical {
+    width: 0px !important;
+    display: none !important;
+}
+
+html::-webkit-scrollbar:horizontal {
+    height: 6px;
+    background: transparent;
+}
+
+html::-webkit-scrollbar-thumb:horizontal {
+    background: rgba(0,0,0,0.2);
+    border-radius: 3px;
+}
+
+body {
+    background: linear-gradient(135deg, #e8f5e8 0%, #f0f4f0 100%);
+    color: var(--dark);
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: auto;  /* keep horizontal scrollbar visible */
+    overflow-y: auto !important; /* Allow scrolling but hide scrollbar */
+    scrollbar-width: none; /* Firefox - hide scrollbar but keep scroll */
+    -ms-overflow-style: none; /* IE and Edge - hide scrollbar but keep scroll */
+}
+
+/* Hide vertical scrollbar for Chrome, Safari, Opera - but keep scroll functionality */
+body::-webkit-scrollbar {
+    width: 0px !important; /* Hide vertical scrollbar */
+    height: 6px;  /* horizontal only */
+}
+
+body::-webkit-scrollbar:vertical {
+    display: none !important;
+    width: 0px !important;
+    visibility: hidden !important;
+}
+
+body::-webkit-scrollbar:horizontal {
+    height: 6px;
+    background: transparent;
+}
+
+body::-webkit-scrollbar-thumb:horizontal {
+    background: rgba(0,0,0,0.2);
+    border-radius: 3px;
+}
+
+/* Hide vertical scrollbar for all elements - but keep scroll functionality */
+* {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: transparent transparent; /* Firefox - hide scrollbar but keep scroll */
+    -ms-overflow-style: none; /* IE and Edge - hide scrollbar but keep scroll */
+}
+
+*::-webkit-scrollbar {
+    width: 0px !important; /* Hide vertical scrollbar */
+    height: 6px; /* Only horizontal */
+}
+
+*::-webkit-scrollbar:vertical {
+    display: none !important;
+    width: 0px !important;
+    visibility: hidden !important;
+}
+
+*::-webkit-scrollbar:horizontal {
+    height: 6px;
+}
+
+*::-webkit-scrollbar-thumb:horizontal {
+    background: rgba(0,0,0,0.2);
+    border-radius: 3px;
+}
+
+.app-container {
+    max-width: 480px;
+    margin: 0 auto;
+    background: white;
+    min-height: 100vh;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow-x: auto;
+    overflow-y: auto !important; /* Allow scrolling but hide scrollbar */
+    scrollbar-width: none; /* Firefox - hide scrollbar but keep scroll */
+    -ms-overflow-style: none; /* IE and Edge - hide scrollbar but keep scroll */
+    /* Remove transform to ensure fixed positioning works correctly */
+    transform: none;
+    will-change: auto;
+}
+
+/* Hide vertical scrollbar in app-container - but keep scroll functionality */
+.app-container::-webkit-scrollbar {
+    width: 0px !important; /* Hide vertical scrollbar */
+    height: 6px; /* Only horizontal */
+}
+
+.app-container::-webkit-scrollbar:vertical {
+    display: none !important;
+    width: 0px !important;
+    visibility: hidden !important;
+}
+
+/* Header Styles */
+header {
+    background: var(--gradient-primary);
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    z-index: 100;
+    box-shadow: var(--shadow-md);
+    transform-origin: center top;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.logo-text h1 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.logo-text span {
+    font-size: 11px;
+    opacity: 0.9;
+}
+
+.header-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-end;
+}
+
+.sync-indicator, .weather-station {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+.sync-indicator i, .weather-station i {
+    font-size: 14px;
+}
+
+/* Weather Alert - Fixed position, only on dashboard */
+.weather-alert {
+    background: var(--gradient-warning);
+    color: var(--dark);
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: slideDown 0.5s ease-out;
+    position: fixed;
+    top: 90px; /* Added more space from header */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    box-sizing: border-box;
+    margin: 0;
+    z-index: 99;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+@keyframes slideDown {
+    from { 
+        transform: translateX(-50%) translateY(-100%); 
+        opacity: 0;
+    }
+    to { 
+        transform: translateX(-50%) translateY(0); 
+        opacity: 1;
+    }
+}
+
+.alert-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.alert-content {
+    flex: 1;
+}
+
+.alert-content strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 14px;
+}
+
+.alert-content p {
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+.alert-close {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    font-size: 16px;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.alert-close:hover {
+    opacity: 1;
+}
+
+/* Navigation */
+nav {
+    display: flex;
+    background: white;
+    border-top: 1px solid #e9ecef;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    z-index: 99;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+}
+
+.nav-item {
+    flex: 1;
+    text-align: center;
+    padding: 12px 0;
+    font-size: 12px;
+    color: var(--gray);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-top: 3px solid transparent;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-item.active {
+    color: var(--primary);
+    border-top-color: var(--primary);
+}
+
+.nav-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-primary);
+    opacity: 0.1;
+    transition: left 0.3s ease;
+}
+
+.nav-item.active::before {
+    left: 0;
+}
+
+.nav-icon {
+    font-size: 18px;
+    margin-bottom: 6px;
+    transition: transform 0.3s ease;
+}
+
+.nav-item.active .nav-icon {
+    transform: scale(1.1);
+}
+
+/* Main Content */
+main {
+    padding: 20px;
+    padding-top: 100px; /* Space for fixed header (80px) */
+    padding-bottom: 120px; /* Space for bottom nav (60px) and connection status (40px) */
+}
+
+/* Dashboard section has extra padding for fixed weather alert */
+section#dashboard {
+    padding-top: 20px; /* Reduced space for fixed weather alert */
+}
+
+.section {
+    display: block;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.section-header {
+    margin-bottom: 20px;
+}
+
+/* Reduce padding-top for dashboard section header */
+section#dashboard .section-header {
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding-top: 0;
+}
+
+.section-header h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 5px;
+}
+
+.section-header p {
+    color: var(--gray);
+    font-size: 14px;
+}
+
+/* Weather Grid - Always 2 columns */
+.weather-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.weather-card {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.weather-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-primary);
+}
+
+.weather-card.temperature::before { background: var(--gradient-danger); }
+.weather-card.humidity::before { background: var(--gradient-info); }
+.weather-card.light::before { background: var(--gradient-warning); }
+.weather-card.wind::before { background: #9c27b0; }
+
+.weather-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.weather-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.weather-icon {
+    font-size: 24px;
+    opacity: 0.8;
+}
+
+.weather-trend {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 20px;
+    background: rgba(0,0,0,0.05);
+}
+
+.weather-trend.up { color: var(--danger); }
+.weather-trend.down { color: var(--info); }
+.weather-trend.stable { color: var(--gray); }
+
+.weather-value {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: var(--dark);
+}
+
+.weather-label {
+    font-size: 12px;
+    color: var(--gray);
+    margin-bottom: 5px;
+}
+
+.weather-detail {
+    font-size: 11px;
+    color: var(--gray);
+    opacity: 0.8;
+}
+
+/* Chart Container */
+.chart-container {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid #e9ecef;
+    position: relative;
+}
+
+.chart-container canvas {
+    max-height: 250px !important;
+    height: 250px !important;
+    width: 100% !important;
+    display: block !important;
+    box-sizing: border-box !important;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.chart-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.chart-legend {
+    display: flex;
+    gap: 15px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--gray);
+}
+
+.legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+.legend-color.temp { background: var(--danger); }
+.legend-color.humidity { background: var(--info); }
+
+/* Quick Stats */
+.quick-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.stat-card {
+    background: white;
+    border-radius: var(--border-radius-sm);
+    padding: 15px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.stat-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin: 0 auto 10px;
+    font-size: 16px;
+}
+
+.stat-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 11px;
+    color: var(--gray);
+}
+
+/* Form Styles */
+.form-container {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid #e9ecef;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.form-label i {
+    color: var(--primary);
+    font-size: 14px;
+}
+
+.form-select, .form-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e9ecef;
+    border-radius: var(--border-radius-sm);
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+/* Placeholder styling for select */
+.form-select option[value=""][disabled] {
+    display: none;
+}
+
+.form-select:invalid {
+    color: #6c757d;
+}
+
+.form-select:focus, .form-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+}
+
+.input-with-unit {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-with-unit .form-input {
+    padding-right: 70px;
+}
+
+.input-unit {
+    position: absolute;
+    right: 15px;
+    color: var(--gray);
+    font-size: 14px;
+}
+
+.submit-btn {
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    border-radius: var(--border-radius-sm);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Prediction Result */
+.prediction-result {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 25px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid #e9ecef;
+    display: none;
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.result-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.result-header h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary-dark);
+}
+
+.result-accuracy {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--success);
+    font-weight: 600;
+}
+
+.save-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius-md);
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.save-btn i {
+    font-size: 14px;
+}
+
+.save-btn:hover {
+    background: var(--primary-dark);
+}
+
+.save-btn:active {
+    transform: translateY(1px);
+}
+
+.result-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.result-card {
+    background: var(--light);
+    border-radius: var(--border-radius-sm);
+    padding: 15px;
+    text-align: center;
+    border-left: 4px solid var(--primary);
+}
+
+.result-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin: 0 auto 10px;
+    font-size: 16px;
+}
+
+.result-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 5px;
+}
+
+.result-label {
+    font-size: 11px;
+    color: var(--gray);
+}
+
+/* Recommendation Cards */
+.ai-recommendations {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.recommendation-card {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.recommendation-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.recommendation-card.urgent {
+    border-left: 4px solid var(--danger);
+    background: linear-gradient(135deg, #fff, #ffebee);
+}
+
+.rec-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.rec-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--gradient-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.rec-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--dark);
+    flex: 1;
+}
+
+.priority-badge {
+    background: var(--danger);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.rec-content {
+    margin-bottom: 15px;
+}
+
+.rec-content p {
+    font-size: 14px;
+    color: var(--dark);
+    margin-bottom: 10px;
+}
+
+.rec-content ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.rec-content li {
+    font-size: 13px;
+    color: var(--gray);
+    margin-bottom: 6px;
+    padding-left: 15px;
+    position: relative;
+}
+
+.rec-content li::before {
+    content: '•';
+    color: var(--primary);
+    position: absolute;
+    left: 0;
+}
+
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.timeline-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+    background: var(--light);
+    border-radius: var(--border-radius-sm);
+}
+
+.timeline-date {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--primary);
+    min-width: 70px;
+}
+
+.timeline-desc {
+    font-size: 13px;
+    color: var(--dark);
+    flex: 1;
+}
+
+.fertilizer-plan {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.fertilizer-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: var(--light);
+    border-radius: var(--border-radius-sm);
+    font-size: 13px;
+}
+
+.fert-name {
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.fert-dose, .fert-time {
+    color: var(--gray);
+}
+
+.rec-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    border-top: 1px solid #e9ecef;
+}
+
+.rec-source {
+    font-size: 11px;
+    color: var(--gray);
+}
+
+.action-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+    background: var(--primary-dark);
+}
+
+/* History Tabs */
+.history-tabs {
+    background: white;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid #e9ecef;
+}
+
+.tab-nav {
+    display: flex;
+    background: var(--light);
+    border-bottom: 1px solid #e9ecef;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 15px;
+    background: none;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gray);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.tab-btn.active {
+    color: var(--primary);
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--primary);
+}
+
+.tab-content {
+    padding: 20px;
+}
+
+.tab-pane {
+    display: none;
+}
+
+.tab-pane.active {
+    display: block;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.history-chart {
+    margin-bottom: 20px;
+}
+
+.history-table {
+    background: var(--light);
+    border-radius: var(--border-radius-sm);
+    overflow: hidden;
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: white;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.table-header h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.export-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: var(--border-radius-sm);
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+}
+
+.export-btn:hover {
+    background: var(--primary-dark);
+}
+
+.table-container {
+    overflow-x: auto;
+    overflow-y: auto; /* Allow scrolling but hide scrollbar */
+    scrollbar-width: none; /* Firefox - hide scrollbar but keep scroll */
+    -ms-overflow-style: none; /* IE and Edge - hide scrollbar but keep scroll */
+}
+
+.table-container::-webkit-scrollbar:vertical {
+    display: none !important;
+    width: 0px !important;
+    visibility: hidden !important;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+    font-size: 13px;
+}
+
+th {
+    background: var(--light);
+    font-weight: 600;
+    color: var(--dark);
+}
+
+td {
+    color: var(--gray);
+}
+
+/* Harvest Stats */
+.harvest-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.stat-comparison {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.comparison-card {
+    background: white;
+    border-radius: var(--border-radius-sm);
+    padding: 20px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid #e9ecef;
+    position: relative;
+}
+
+.comparison-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 5px;
+}
+
+.comparison-label {
+    font-size: 12px;
+    color: var(--gray);
+    margin-bottom: 8px;
+}
+
+.comparison-trend {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 12px;
+    display: inline-block;
+}
+
+.comparison-trend.up {
+    background: #e8f5e8;
+    color: var(--success);
+}
+
+.comparison-trend.down {
+    background: #ffebee;
+    color: var(--danger);
+}
+
+.yield-chart {
+    background: white;
+    border-radius: var(--border-radius-sm);
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid #e9ecef;
+}
+
+/* Connection Status - Toast Notification */
+.connection-status {
+    position: fixed;
+    top: 20px;
+    right: 0;
+    background: var(--info);
+    color: white;
+    padding: 12px 20px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-radius: var(--border-radius-sm) 0 0 var(--border-radius-sm);
+    min-width: 200px;
+    max-width: 300px;
+    animation: slideInRight 0.3s ease-out, fadeOut 0.3s ease-in 4.7s forwards;
+    opacity: 0;
+}
+
+.connection-status.show {
+    opacity: 1;
+    animation: slideInRight 1s ease-out;
+}
+
+.connection-status.offline {
+    background: var(--danger);
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .app-container {
+        box-shadow: none;
+    }
+    
+    /* Connection status adjustment for mobile */
+    .connection-status {
+        right: 0;
+        max-width: calc(100% - 20px);
+        border-radius: var(--border-radius-sm) 0 0 var(--border-radius-sm);
+    }
+    
+    /* Weather grid tetap 2 kolom di semua ukuran */
+    .weather-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px; /* Sedikit mengurangi gap di mobile */
+    }
+    
+    .quick-stats {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .result-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .stat-comparison {
+        grid-template-columns: 1fr;
+    }
+    
+    .rec-footer {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    
+    .fertilizer-item {
+        flex-direction: column;
+        gap: 5px;
+        align-items: flex-start;
+    }
+}
+
+/* Loading Animation */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Pulse Animation for Important Elements */
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Account Page Styles */
+.account-container {
+    padding: 20px;
+    padding-bottom: 100px;
+}
+
+.account-profile {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid #e9ecef;
+    text-align: center;
+}
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    font-size: 40px;
+    color: white;
+    overflow: hidden;
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-info h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 5px;
+}
+
+.profile-info p {
+    color: var(--gray);
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.profile-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #e8f5e8;
+    color: var(--success);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.account-details {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.detail-card {
+    background: white;
+    border-radius: var(--border-radius-sm);
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid #e9ecef;
+}
+
+.detail-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.detail-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+}
+
+.detail-header h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--dark);
+    margin: 0;
+}
+
+.detail-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+}
+
+.detail-label {
+    font-size: 14px;
+    color: var(--gray);
+}
+
+.detail-value {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--dark);
+    text-align: right;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status-badge.active {
+    background: #e8f5e8;
+    color: var(--success);
+}
+
+.account-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.action-btn {
+    padding: 14px 20px;
+    border-radius: var(--border-radius-sm);
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.action-btn.primary {
+    background: var(--gradient-primary);
+    color: white;
+}
+
+.action-btn.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.action-btn.secondary {
+    background: white;
+    color: var(--danger);
+    border: 2px solid var(--danger);
+}
+
+.action-btn.secondary:hover {
+    background: var(--danger);
+    color: white;
+}
+
+.action-btn:active {
+    transform: scale(0.98);
+}
+
+/* ============================================
+   GLOBAL SCROLLBAR HIDING - VERTICAL ONLY
+   ============================================ */
+
+/* Ensure all scrollable elements hide vertical scrollbar */
+main,
+section,
+div,
+article,
+aside,
+nav,
+header,
+footer {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: transparent transparent; /* Firefox - hide scrollbar */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+main::-webkit-scrollbar:vertical,
+section::-webkit-scrollbar:vertical,
+div::-webkit-scrollbar:vertical,
+article::-webkit-scrollbar:vertical,
+aside::-webkit-scrollbar:vertical,
+nav::-webkit-scrollbar:vertical,
+header::-webkit-scrollbar:vertical,
+footer::-webkit-scrollbar:vertical {
+    display: none !important;
+    width: 0 !important;
+    visibility: hidden !important;
+}
+
+/* For elements with overflow */
+[style*="overflow"],
+.overflow-auto,
+.overflow-scroll,
+.overflow-y-auto,
+.overflow-y-scroll {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+[style*="overflow"]::-webkit-scrollbar:vertical,
+.overflow-auto::-webkit-scrollbar:vertical,
+.overflow-scroll::-webkit-scrollbar:vertical,
+.overflow-y-auto::-webkit-scrollbar:vertical,
+.overflow-y-scroll::-webkit-scrollbar:vertical {
+    display: none !important;
+    width: 0 !important;
+    visibility: hidden !important;
+}

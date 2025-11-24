@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroMETT - Smart Farming Solution untuk Pertanian Modern</title>
+    <meta name="description" content="AgroMETT adalah solusi pertanian cerdas berbasis teknologi IoT dan AI untuk meningkatkan produktivitas dan efisiensi pertanian Indonesia.">
+    <link rel="icon" type="image/png" href="image/logo1x1.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo-container">
+                    <img src="image/logo.png" alt="AgroMETT Logo" class="logo-img">
+                </div>
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="#home" class="nav-link active">Beranda</a></li>
+                    <li><a href="#features" class="nav-link">Fitur</a></li>
+                    <li><a href="#solutions" class="nav-link">Solusi</a></li>
+                    <li><a href="#benefits" class="nav-link">Keuntungan</a></li>
+                    <li><a href="#about" class="nav-link">Tentang</a></li>
+                    <li><a href="#contact" class="nav-link">Kontak</a></li>
+                    <li><a href="auth.html" class="nav-link nav-login">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>Login</span>
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-seedling"></i>
+                    <span>Solusi Pertanian Cerdas</span>
+                </div>
+                <h1 class="hero-title">
+                    Transformasi Pertanian dengan
+                    <span class="highlight">Teknologi IoT & AI</span>
+                </h1>
+                <p class="hero-description">
+                    AgroMETT menghadirkan sistem monitoring cuaca real-time dan rekomendasi cerdas 
+                    untuk meningkatkan produktivitas pertanian Anda hingga 30% lebih efisien.
+                </p>
+                <div class="hero-cta">
+                    <a href="#contact" class="btn btn-primary">
+                        <span>Mulai Sekarang</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#features" class="btn btn-secondary">
+                        <span>Pelajari Lebih Lanjut</span>
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Petani Aktif</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">30%</div>
+                        <div class="stat-label">Peningkatan Produktivitas</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Monitoring Real-Time</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Fitur Unggulan</span>
+                <h2 class="section-title">Teknologi Canggih untuk Pertanian Modern</h2>
+                <p class="section-description">
+                    Platform lengkap dengan fitur-fitur terdepan untuk mengoptimalkan hasil pertanian Anda
+                </p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cloud-sun-rain"></i>
+                    </div>
+                    <h3 class="feature-title">Monitoring Cuaca Real-Time</h3>
+                    <p class="feature-description">
+                        Pantau kondisi cuaca secara real-time dengan sensor IoT yang akurat. 
+                        Dapatkan data suhu, kelembaban, intensitas cahaya, dan kecepatan angin.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Update setiap menit</li>
+                        <li><i class="fas fa-check"></i> Prediksi cuaca 7 hari</li>
+                        <li><i class="fas fa-check"></i> Notifikasi peringatan dini</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="feature-title">AI Rekomendasi Cerdas</h3>
+                    <p class="feature-description">
+                        Dapatkan rekomendasi berbasis AI untuk jadwal tanam, pemupukan, 
+                        dan pengairan yang optimal berdasarkan data cuaca dan kondisi lahan.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Analisis data prediktif</li>
+                        <li><i class="fas fa-check"></i> Rekomendasi personalisasi</li>
+                        <li><i class="fas fa-check"></i> Akurasi hingga 85%</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="feature-title">Analisis Produktivitas</h3>
+                    <p class="feature-description">
+                        Analisis data historis untuk memprediksi hasil panen, estimasi pendapatan, 
+                        dan perbandingan produktivitas antar musim.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Prediksi hasil panen</li>
+                        <li><i class="fas fa-check"></i> Estimasi pendapatan</li>
+                        <li><i class="fas fa-check"></i> Grafik dan visualisasi data</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Akses Mobile & Web</h3>
+                    <p class="feature-description">
+                        Akses platform dari mana saja melalui aplikasi mobile atau web. 
+                        Responsif dan mudah digunakan di semua perangkat.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Interface responsif</li>
+                        <li><i class="fas fa-check"></i> Sinkronisasi cloud</li>
+                        <li><i class="fas fa-check"></i> Offline mode tersedia</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3 class="feature-title">Notifikasi Pintar</h3>
+                    <p class="feature-description">
+                        Terima notifikasi penting tentang kondisi cuaca ekstrem, jadwal pemupukan, 
+                        dan waktu panen optimal langsung ke perangkat Anda.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Peringatan cuaca ekstrem</li>
+                        <li><i class="fas fa-check"></i> Pengingat jadwal</li>
+                        <li><i class="fas fa-check"></i> Customizable alerts</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 class="feature-title">Data Historis Lengkap</h3>
+                    <p class="feature-description">
+                        Simpan dan analisis data cuaca serta hasil panen dari waktu ke waktu. 
+                        Ekspor data untuk analisis lebih lanjut.
+                    </p>
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> Penyimpanan cloud</li>
+                        <li><i class="fas fa-check"></i> Ekspor data Excel/CSV</li>
+                        <li><i class="fas fa-check"></i> Backup otomatis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section id="solutions" class="solutions">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Solusi Kami</span>
+                <h2 class="section-title">Solusi Lengkap untuk Setiap Kebutuhan Pertanian</h2>
+                <p class="section-description">
+                    Dari monitoring hingga analisis, kami menyediakan solusi end-to-end untuk pertanian modern
+                </p>
+            </div>
+            <div class="solutions-content">
+                <div class="solution-item">
+                    <div class="solution-image">
+                        <img src="image/product1.png" alt="Stasiun Cuaca IoT" class="solution-image-img">
+                    </div>
+                    <div class="solution-text">
+                        <h3>Stasiun Cuaca IoT</h3>
+                        <p>
+                            Sistem monitoring cuaca lengkap dengan sensor-sensor canggih yang terhubung 
+                            langsung ke cloud. Dapatkan data akurat real-time untuk pengambilan keputusan yang tepat.
+                        </p>
+                        <ul class="solution-features">
+                            <li><i class="fas fa-check-circle"></i> Sensor suhu, kelembaban, cahaya, dan angin</li>
+                            <li><i class="fas fa-check-circle"></i> Koneksi WiFi/LoRa untuk area terpencil</li>
+                            <li><i class="fas fa-check-circle"></i> Baterai tahan lama dengan panel surya</li>
+                            <li><i class="fas fa-check-circle"></i> Tahan cuaca ekstrem</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="solution-item reverse">
+                    <div class="solution-image">
+                        <img src="image/product4.png" alt="Platform AI Analytics" class="solution-image-img">
+                    </div>
+                    <div class="solution-text">
+                        <h3>Platform AI Analytics</h3>
+                        <p>
+                            Platform berbasis AI yang menganalisis data cuaca dan lahan untuk memberikan 
+                            rekomendasi optimal. Meningkatkan efisiensi dan produktivitas pertanian Anda.
+                        </p>
+                        <ul class="solution-features">
+                            <li><i class="fas fa-check-circle"></i> Machine learning untuk prediksi akurat</li>
+                            <li><i class="fas fa-check-circle"></i> Rekomendasi jadwal tanam optimal</li>
+                            <li><i class="fas fa-check-circle"></i> Manajemen air dan pemupukan cerdas</li>
+                            <li><i class="fas fa-check-circle"></i> Dashboard interaktif dan mudah digunakan</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="solution-item">
+                    <div class="solution-image">
+                        <div class="solution-icon-large">
+                            <i class="fas fa-users"></i>
+                        </div>
+                    </div>
+                    <div class="solution-text">
+                        <h3>Konsultasi & Support</h3>
+                        <p>
+                            Tim ahli kami siap membantu Anda dalam implementasi dan optimasi sistem. 
+                            Dapatkan dukungan penuh untuk kesuksesan pertanian Anda.
+                        </p>
+                        <ul class="solution-features">
+                            <li><i class="fas fa-check-circle"></i> Setup dan instalasi profesional</li>
+                            <li><i class="fas fa-check-circle"></i> Training dan workshop</li>
+                            <li><i class="fas fa-check-circle"></i> Support 24/7</li>
+                            <li><i class="fas fa-check-circle"></i> Update dan maintenance berkala</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="benefits">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Keuntungan</span>
+                <h2 class="section-title">Mengapa Memilih AgroMETT?</h2>
+                <p class="section-description">
+                    Investasi teknologi yang memberikan return nyata untuk pertanian Anda
+                </p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-number">01</div>
+                    <h3>Meningkatkan Produktivitas</h3>
+                    <p>Optimalkan hasil panen hingga 30% lebih tinggi dengan data-driven decision making</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-number">02</div>
+                    <h3>Mengurangi Risiko</h3>
+                    <p>Minimalkan kerugian akibat cuaca ekstrem dengan prediksi dan peringatan dini</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-number">03</div>
+                    <h3>Efisiensi Biaya</h3>
+                    <p>Hemat hingga 25% biaya operasional dengan manajemen air dan pemupukan yang tepat</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-number">04</div>
+                    <h3>Data Terpusat</h3>
+                    <p>Akses semua data pertanian Anda dari satu platform yang terintegrasi</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-number">05</div>
+                    <h3>Skalabel</h3>
+                    <p>Dari lahan kecil hingga perkebunan besar, solusi yang dapat disesuaikan</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-number">06</div>
+                    <h3>Ramah Lingkungan</h3>
+                    <p>Pertanian presisi yang mengurangi penggunaan air dan pupuk berlebihan</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <span class="section-badge">Tentang Kami</span>
+                    <h2 class="section-title">Mengubah Masa Depan Pertanian Indonesia</h2>
+                    <p class="about-description">
+                        AgroMETT lahir dari visi untuk membawa pertanian Indonesia ke era digital. 
+                        Kami percaya bahwa teknologi dapat menjadi katalisator untuk meningkatkan 
+                        kesejahteraan petani dan ketahanan pangan nasional.
+                    </p>
+                    <p class="about-description">
+                        Dengan kombinasi IoT, AI, dan expertise di bidang pertanian, kami menghadirkan 
+                        solusi yang tidak hanya canggih secara teknologi, tetapi juga praktis dan mudah 
+                        digunakan oleh petani di seluruh Indonesia.
+                    </p>
+                    <div class="about-stats">
+                        <div class="about-stat">
+                            <div class="about-stat-number">500+</div>
+                            <div class="about-stat-label">Petani Terdaftar</div>
+                        </div>
+                        <div class="about-stat">
+                            <div class="about-stat-number">1000+</div>
+                            <div class="about-stat-label">Hektar Lahan Terpantau</div>
+                        </div>
+                        <div class="about-stat">
+                            <div class="about-stat-number">95%</div>
+                            <div class="about-stat-label">Tingkat Kepuasan</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="image/product3.png" alt="AgroMETT Product" class="about-image-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Hubungi Kami</span>
+                <h2 class="section-title">Siap Memulai Transformasi Pertanian Anda?</h2>
+                <p class="section-description">
+                    Mari diskusikan bagaimana AgroMETT dapat membantu meningkatkan produktivitas pertanian Anda
+                </p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Alamat</h4>
+                            <p>Jl. Pertanian No. 123<br>Jakarta, Indonesia 12345</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Telepon</h4>
+                            <p>+62 21 1234 5678</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p>info@agromett.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Jam Operasional</h4>
+                            <p>Senin - Jumat: 08:00 - 17:00 WIB</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-container">
+                    <form class="contact-form" id="contact-form">
+                        <div class="form-group">
+                            <label for="name">Nama Lengkap</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Nomor Telepon</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Pesan</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <span>Kirim Pesan</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="image/logo.png" alt="AgroMETT Logo" class="footer-logo-img">
+                    </div>
+                    <p class="footer-description">
+                        Solusi pertanian cerdas berbasis teknologi IoT dan AI untuk meningkatkan 
+                        produktivitas dan efisiensi pertanian Indonesia.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Produk</h4>
+                    <ul class="footer-links">
+                        <li><a href="#features">Fitur</a></li>
+                        <li><a href="#solutions">Solusi</a></li>
+                        <li><a href="#benefits">Keuntungan</a></li>
+                        <li><a href="#about">Tentang Kami</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Perusahaan</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">Tentang</a></li>
+                        <li><a href="#contact">Kontak</a></li>
+                        <li><a href="#">Karir</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Dukungan</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Pusat Bantuan</a></li>
+                        <li><a href="#">Dokumentasi</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 AgroMETT. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="index.js"></script>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agromett - AI Rekomendasi</title>
+    <link rel="icon" type="image/png" href="image/logo1x1.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-cloud-sun-rain"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Agromett</h1>
+                    <span>Smart Farming Solution</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <div class="sync-indicator" id="sync-indicator">
+                    <i class="fas fa-sync-alt" id="sync-btn"></i>
+                    <span class="sync-status" id="sync-status">Disinkronisasi</span>
+                </div>
+                <div class="weather-station">
+                    <i class="fas fa-satellite-dish"></i>
+                    <span>Stasiun Utama</span>
+                </div>
+            </div>
+        </header>
+        
+        <main>
+            <!-- Recommendation Section -->
+            <section id="recommendation" class="section active">
+                <div class="section-header">
+                    <h2>Rekomendasi Cerdas AI</h2>
+                    <p>Saran berbasis data cuaca dan kondisi lahan Anda</p>
+                </div>
+                
+                <div class="ai-recommendations">
+                    <div class="recommendation-card urgent">
+                        <div class="rec-header">
+                            <div class="rec-icon">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                            <h3>Tindakan Segera</h3>
+                            <span class="priority-badge">Penting</span>
+                        </div>
+                        <div class="rec-content">
+                            <p>Berdasarkan prediksi hujan lebat dalam 2 jam, segera lakukan:</p>
+                            <ul>
+                                <li>Periksa dan perbaiki saluran drainase</li>
+                                <li>Tutup persemaian dengan plastik transparan</li>
+                                <li>Pastikan pompa air standby</li>
+                            </ul>
+                        </div>
+                        <div class="rec-footer">
+                            <span class="rec-source">Berdasarkan data AGROMETT</span>
+                            <button class="action-btn">Tandai Selesai</button>
+                        </div>
+                    </div>
+                    
+                    <div class="recommendation-card">
+                        <div class="rec-header">
+                            <div class="rec-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <h3>Jadwal Tanam Optimal</h3>
+                        </div>
+                        <div class="rec-content">
+                            <p>Waktu terbaik untuk menanam padi varietas Ciherang:</p>
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-date">15-20 Nov</div>
+                                    <div class="timeline-desc">Persiapan lahan</div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-date">21-25 Nov</div>
+                                    <div class="timeline-desc">Tanam bibit</div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-date">15-20 Jan</div>
+                                    <div class="timeline-desc">Estimasi panen</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="recommendation-card">
+                        <div class="rec-header">
+                            <div class="rec-icon">
+                                <i class="fas fa-tint"></i>
+                            </div>
+                            <h3>Manajemen Air</h3>
+                        </div>
+                        <div class="rec-content">
+                            <p>Rekomendasi pengairan untuk fase vegetatif:</p>
+                            <ul>
+                                <li>Intensitas: 2-3 cm air di permukaan</li>
+                                <li>Frekuensi: 3 hari sekali</li>
+                                <li>Waktu: Pagi hari (06:00-08:00)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="recommendation-card">
+                        <div class="rec-header">
+                            <div class="rec-icon">
+                                <i class="fas fa-seedling"></i>
+                            </div>
+                            <h3>Pemupukan</h3>
+                        </div>
+                        <div class="rec-content">
+                            <p>Jadwal dan dosis pemupukan:</p>
+                            <div class="fertilizer-plan">
+                                <div class="fertilizer-item">
+                                    <span class="fert-name">Urea</span>
+                                    <span class="fert-dose">150 kg/ha</span>
+                                    <span class="fert-time">Minggu depan</span>
+                                </div>
+                                <div class="fertilizer-item">
+                                    <span class="fert-name">NPK</span>
+                                    <span class="fert-dose">200 kg/ha</span>
+                                    <span class="fert-time">2 minggu lagi</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <nav>
+            <a href="dashboard.html" class="nav-item">
+                <div class="nav-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <span>Dashboard</span>
+            </a>
+            <a href="input-data.html" class="nav-item">
+                <div class="nav-icon">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <span>Input Data</span>
+            </a>
+            <a href="ai-rekomendasi.html" class="nav-item active">
+                <div class="nav-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <span>AI Rekomendasi</span>
+            </a>
+            <a href="riwayat.html" class="nav-item">
+                <div class="nav-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <span>Riwayat</span>
+            </a>
+            <a href="account.html" class="nav-item">
+                <div class="nav-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <span>Akun</span>
+            </a>
+        </nav>
+        
+        <div class="connection-status" id="connection-status">
+            <i class="fas fa-wifi"></i>
+            <span>Terhubung ke Cloud AGROMETT</span>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module" src="firebase-auth.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+

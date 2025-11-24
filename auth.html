@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agromett - Masuk</title>
+    <link rel="icon" type="image/png" href="image/logo1x1.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Hide vertical scrollbar globally - but keep scroll functionality */
+        html {
+            overflow-y: auto !important; /* Allow scrolling but hide scrollbar */
+            scrollbar-width: none; /* Firefox - hide scrollbar but keep scroll */
+            -ms-overflow-style: none; /* IE and Edge - hide scrollbar but keep scroll */
+        }
+        
+        html::-webkit-scrollbar {
+            width: 0px; /* Hide vertical scrollbar but keep scroll functionality */
+            height: 0px;
+        }
+        
+        html::-webkit-scrollbar:vertical {
+            display: none !important;
+            width: 0px !important;
+            visibility: hidden !important;
+        }
+        
+        body {
+            overflow-y: auto !important; /* Allow scrolling but hide scrollbar */
+            scrollbar-width: none; /* Firefox - hide scrollbar but keep scroll */
+            -ms-overflow-style: none; /* IE and Edge - hide scrollbar but keep scroll */
+        }
+        
+        body::-webkit-scrollbar {
+            width: 0px !important; /* Hide vertical scrollbar */
+        }
+        
+        body::-webkit-scrollbar:vertical {
+            display: none !important;
+            width: 0px !important;
+            visibility: hidden !important;
+        }
+        
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: transparent transparent;
+            -ms-overflow-style: none;
+        }
+        
+        *::-webkit-scrollbar:vertical {
+            display: none !important;
+            width: 0px !important;
+            visibility: hidden !important;
+        }
+        
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #e8f5e8 0%, #f0f4f0 100%);
+            padding: 20px;
+        }
+        
+        .auth-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            padding: 40px 30px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .auth-logo {
+            margin-bottom: 30px;
+        }
+        
+        .auth-logo .logo-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 40px;
+            color: white;
+        }
+        
+        .auth-logo h1 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .auth-logo p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        .auth-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        
+        .auth-subtitle {
+            color: var(--gray);
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .google-signin-btn {
+            width: 100%;
+            padding: 14px 20px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--border-radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--dark);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+        
+        .google-signin-btn:hover {
+            border-color: #4285f4;
+            box-shadow: 0 2px 8px rgba(66, 133, 244, 0.2);
+        }
+        
+        .google-signin-btn:active {
+            transform: scale(0.98);
+        }
+        
+        /* Ensure button stays in place when loading */
+        .google-signin-btn.loading {
+            transform: none !important;
+            animation: none !important;
+            position: relative;
+        }
+        
+        .google-signin-btn.loading:active {
+            transform: none !important;
+        }
+        
+        .google-logo {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .google-logo svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .auth-divider {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        .auth-divider::before,
+        .auth-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e0e0e0;
+        }
+        
+        .auth-divider span {
+            padding: 0 15px;
+        }
+        
+        .auth-footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .auth-footer p {
+            color: var(--gray);
+            font-size: 12px;
+            line-height: 1.6;
+        }
+        
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            position: relative;
+            flex-shrink: 0;
+        }
+        
+        .google-signin-btn.loading .loading-spinner,
+        .auth-submit-btn.loading .loading-spinner {
+            display: block;
+        }
+        
+        .google-signin-btn.loading .google-logo,
+        .google-signin-btn.loading #signin-text {
+            display: none;
+        }
+        
+        .auth-submit-btn.loading #login-submit-text,
+        .auth-submit-btn.loading #register-submit-text {
+            display: none;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Ensure only spinner rotates, not the button */
+        .google-signin-btn.loading * {
+            animation: none !important;
+        }
+        
+        .google-signin-btn.loading .loading-spinner {
+            animation: spin 1s linear infinite !important;
+        }
+        
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 12px;
+            border-radius: var(--border-radius-sm);
+            margin-bottom: 20px;
+            font-size: 14px;
+            display: none;
+        }
+        
+        .error-message.show {
+            display: block;
+        }
+        
+        .auth-form {
+            display: none;
+            margin-bottom: 20px;
+        }
+        
+        .auth-form.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--border-radius-sm);
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+        }
+        
+        .form-input.error {
+            border-color: var(--danger);
+        }
+        
+        .input-error {
+            display: none;
+            color: var(--danger);
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        
+        .input-error.show {
+            display: block;
+        }
+        
+        .password-toggle {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        /* Hide browser's default password reveal button - Chrome/Edge/Safari */
+        .password-toggle input[type="password"]::-webkit-credentials-auto-fill-button,
+        .password-toggle input[type="password"]::-webkit-strong-password-auto-fill-button,
+        .password-toggle input[type="password"]::-webkit-textfield-decoration-container,
+        .password-toggle input[type="password"]::-webkit-inner-spin-button,
+        .password-toggle input[type="password"]::-webkit-outer-spin-button {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            width: 0 !important;
+            height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            position: absolute !important;
+            left: -9999px !important;
+        }
+        
+        /* Hide Firefox password reveal button */
+        .password-toggle input[type="password"] {
+            -moz-appearance: textfield;
+        }
+        
+        /* Hide IE/Edge password reveal button */
+        .password-toggle input[type="password"]::-ms-reveal,
+        .password-toggle input[type="password"]::-ms-clear {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            width: 0 !important;
+            height: 0 !important;
+            position: absolute !important;
+            left: -9999px !important;
+        }
+        
+        /* Hide any reveal button that appears inside input */
+        .password-toggle input[type="password"]::after,
+        .password-toggle input[type="password"]::before {
+            display: none !important;
+            content: none !important;
+        }
+        
+        /* Additional global styles to hide password reveal buttons */
+        input[type="password"]::-webkit-credentials-auto-fill-button,
+        input[type="password"]::-webkit-strong-password-auto-fill-button,
+        input[data-form-type="password"]::-webkit-credentials-auto-fill-button,
+        input[data-form-type="password"]::-webkit-strong-password-auto-fill-button {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            width: 0 !important;
+            height: 0 !important;
+            position: absolute !important;
+            left: -9999px !important;
+            clip: rect(0, 0, 0, 0) !important;
+        }
+        
+        input[type="password"]::-ms-reveal,
+        input[type="password"]::-ms-clear,
+        input[data-form-type="password"]::-ms-reveal,
+        input[data-form-type="password"]::-ms-clear {
+            display: none !important;
+            visibility: hidden !important;
+            width: 0 !important;
+            height: 0 !important;
+            position: absolute !important;
+            left: -9999px !important;
+        }
+        
+        .password-toggle-btn {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            font-size: 16px;
+            padding: 0;
+            margin: 0;
+            z-index: 10;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            line-height: 1;
+            outline: none;
+        }
+        
+        .password-toggle-btn:focus {
+            outline: none;
+        }
+        
+        .password-icon {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            line-height: 1;
+            pointer-events: none;
+            position: relative;
+        }
+        
+        .password-toggle-btn i {
+            display: block !important;
+            width: 16px;
+            height: 16px;
+            line-height: 1;
+            pointer-events: none;
+            position: relative;
+            font-size: 16px;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Ensure Font Awesome icon renders only once */
+        .password-toggle-btn i::before {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .password-toggle-btn i::after {
+            display: none !important;
+            content: "" !important;
+            width: 0 !important;
+            height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        
+        /* Remove any pseudo-elements from button and span */
+        .password-toggle-btn::before,
+        .password-toggle-btn::after,
+        .password-icon::before,
+        .password-icon::after {
+            display: none !important;
+            content: "" !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+        
+        .password-toggle-btn:hover {
+            color: var(--dark);
+        }
+        
+        .password-toggle .form-input {
+            padding-right: 45px;
+            width: 100%;
+        }
+        
+        /* Prevent any duplicate rendering from child elements */
+        .password-toggle-btn * {
+            pointer-events: none;
+        }
+        
+        /* Ensure only one icon is visible */
+        .password-toggle-btn .password-icon {
+            display: inline-block !important;
+        }
+        
+        .password-toggle-btn i.fa-eye,
+        .password-toggle-btn i.fa-eye-slash {
+            display: block !important;
+        }
+        
+        .auth-submit-btn {
+            width: 100%;
+            padding: 14px 20px;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius-sm);
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .auth-submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
+        }
+        
+        .auth-submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .auth-submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .auth-toggle {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: var(--gray);
+        }
+        
+        .auth-toggle a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .auth-toggle a:hover {
+            text-decoration: underline;
+        }
+        
+        .form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .form-tabs {
+            display: flex;
+            gap: 10px;
+            background: var(--light);
+            padding: 4px;
+            border-radius: var(--border-radius-sm);
+        }
+        
+        .form-tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            border: none;
+            background: transparent;
+            color: var(--gray);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: var(--border-radius-sm);
+            transition: all 0.3s ease;
+        }
+        
+        .form-tab.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: var(--shadow-sm);
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-logo">
+                <div class="logo-icon">
+                    <i class="fas fa-cloud-sun-rain"></i>
+                </div>
+                <h1>Agromett</h1>
+                <p>Smart Farming Solution</p>
+            </div>
+            
+            <h2 class="auth-title" id="auth-title">Selamat Datang</h2>
+            <p class="auth-subtitle" id="auth-subtitle">Masuk untuk mengakses dashboard dan fitur lengkap</p>
+            
+            <div class="error-message" id="error-message"></div>
+            
+            <!-- Form Tabs -->
+            <div class="form-header">
+                <div class="form-tabs">
+                    <button class="form-tab active" id="login-tab" data-mode="login">Masuk</button>
+                    <button class="form-tab" id="register-tab" data-mode="register">Daftar</button>
+                </div>
+            </div>
+            
+            <!-- Login Form -->
+            <form class="auth-form active" id="login-form">
+                <div class="form-group">
+                    <label for="login-email" class="form-label">Email</label>
+                    <input type="email" id="login-email" class="form-input" placeholder="nama@email.com" required>
+                    <div class="input-error" id="login-email-error"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="login-password" class="form-label">Password</label>
+                    <div class="password-toggle">
+                        <input type="password" id="login-password" class="form-input" placeholder="Masukkan password" required autocomplete="current-password" data-form-type="password">
+                        <button type="button" class="password-toggle-btn" id="login-password-toggle" aria-label="Toggle password visibility" tabindex="0">
+                            <span class="password-icon"><i class="fas fa-eye" aria-hidden="true"></i></span>
+                        </button>
+                    </div>
+                    <div class="input-error" id="login-password-error"></div>
+                </div>
+                
+                <button type="submit" class="auth-submit-btn" id="login-submit-btn">
+                    <span id="login-submit-text">Masuk</span>
+                    <div class="loading-spinner"></div>
+                </button>
+            </form>
+            
+            <!-- Register Form -->
+            <form class="auth-form" id="register-form">
+                <div class="form-group">
+                    <label for="register-name" class="form-label">Nama Lengkap</label>
+                    <input type="text" id="register-name" class="form-input" placeholder="Nama lengkap Anda" required>
+                    <div class="input-error" id="register-name-error"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="register-email" class="form-label">Email</label>
+                    <input type="email" id="register-email" class="form-input" placeholder="nama@email.com" required>
+                    <div class="input-error" id="register-email-error"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="register-password" class="form-label">Password</label>
+                    <div class="password-toggle">
+                        <input type="password" id="register-password" class="form-input" placeholder="Minimal 6 karakter" required minlength="6" autocomplete="new-password" data-form-type="password">
+                        <button type="button" class="password-toggle-btn" id="register-password-toggle" aria-label="Toggle password visibility" tabindex="0">
+                            <span class="password-icon"><i class="fas fa-eye" aria-hidden="true"></i></span>
+                        </button>
+                    </div>
+                    <div class="input-error" id="register-password-error"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="register-password-confirm" class="form-label">Konfirmasi Password</label>
+                    <div class="password-toggle">
+                        <input type="password" id="register-password-confirm" class="form-input" placeholder="Ulangi password" required autocomplete="new-password" data-form-type="password">
+                        <button type="button" class="password-toggle-btn" id="register-password-confirm-toggle" aria-label="Toggle password visibility" tabindex="0">
+                            <span class="password-icon"><i class="fas fa-eye" aria-hidden="true"></i></span>
+                        </button>
+                    </div>
+                    <div class="input-error" id="register-password-confirm-error"></div>
+                </div>
+                
+                <button type="submit" class="auth-submit-btn" id="register-submit-btn">
+                    <span id="register-submit-text">Daftar</span>
+                    <div class="loading-spinner"></div>
+                </button>
+            </form>
+            
+            <div class="auth-divider">
+                <span>atau</span>
+            </div>
+            
+            <button class="google-signin-btn" id="google-signin-btn">
+                <div class="google-logo">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                    </svg>
+                </div>
+                <span id="signin-text">Masuk dengan Google</span>
+                <div class="loading-spinner"></div>
+            </button>
+            
+            <div class="auth-footer">
+                <p>
+                    Dengan masuk, Anda menyetujui <a href="#" style="color: var(--primary);">Ketentuan Layanan</a> 
+                    dan <a href="#" style="color: var(--primary);">Kebijakan Privasi</a> kami.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module" src="firebase-auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Elements
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            const loginTab = document.getElementById('login-tab');
+            const registerTab = document.getElementById('register-tab');
+            const googleSigninBtn = document.getElementById('google-signin-btn');
+            const errorMessage = document.getElementById('error-message');
+            const authTitle = document.getElementById('auth-title');
+            const authSubtitle = document.getElementById('auth-subtitle');
+            
+            // Form inputs
+            const loginEmail = document.getElementById('login-email');
+            const loginPassword = document.getElementById('login-password');
+            const registerName = document.getElementById('register-name');
+            const registerEmail = document.getElementById('register-email');
+            const registerPassword = document.getElementById('register-password');
+            const registerPasswordConfirm = document.getElementById('register-password-confirm');
+            
+            // Password toggles
+            const loginPasswordToggle = document.getElementById('login-password-toggle');
+            const registerPasswordToggle = document.getElementById('register-password-toggle');
+            const registerPasswordConfirmToggle = document.getElementById('register-password-confirm-toggle');
+            
+            // Submit buttons
+            const loginSubmitBtn = document.getElementById('login-submit-btn');
+            const registerSubmitBtn = document.getElementById('register-submit-btn');
+            
+            // Check if user is already logged in
+            const { getCurrentUser } = await import('./firebase-auth.js');
+            getCurrentUser().then(user => {
+                if (user) {
+                    window.location.href = 'dashboard.html';
+                }
+            });
+            
+            // Toggle between login and register
+            function switchMode(mode) {
+                if (mode === 'login') {
+                    loginTab.classList.add('active');
+                    registerTab.classList.remove('active');
+                    loginForm.classList.add('active');
+                    registerForm.classList.remove('active');
+                    authTitle.textContent = 'Selamat Datang';
+                    authSubtitle.textContent = 'Masuk untuk mengakses dashboard dan fitur lengkap';
+                } else {
+                    registerTab.classList.add('active');
+                    loginTab.classList.remove('active');
+                    registerForm.classList.add('active');
+                    loginForm.classList.remove('active');
+                    authTitle.textContent = 'Buat Akun Baru';
+                    authSubtitle.textContent = 'Daftar untuk mulai menggunakan Agromett';
+                }
+                errorMessage.classList.remove('show');
+                clearFormErrors();
+            }
+            
+            loginTab.addEventListener('click', () => switchMode('login'));
+            registerTab.addEventListener('click', () => switchMode('register'));
+            
+            // Password toggle functionality - using direct event listeners to avoid duplication
+            // Ensure event listeners are only added once
+            if (!loginPasswordToggle.dataset.listenerAdded) {
+                loginPasswordToggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const input = loginPassword;
+                    const icon = loginPasswordToggle.querySelector('i');
+                    if (!icon) return;
+                    
+                    if (input.type === 'password') {
+                        input.type = 'text';
+                        icon.className = 'fas fa-eye-slash';
+                    } else {
+                        input.type = 'password';
+                        icon.className = 'fas fa-eye';
+                    }
+                });
+                loginPasswordToggle.dataset.listenerAdded = 'true';
+            }
+            
+            if (!registerPasswordToggle.dataset.listenerAdded) {
+                registerPasswordToggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const input = registerPassword;
+                    const icon = registerPasswordToggle.querySelector('i');
+                    if (!icon) return;
+                    
+                    if (input.type === 'password') {
+                        input.type = 'text';
+                        icon.className = 'fas fa-eye-slash';
+                    } else {
+                        input.type = 'password';
+                        icon.className = 'fas fa-eye';
+                    }
+                });
+                registerPasswordToggle.dataset.listenerAdded = 'true';
+            }
+            
+            if (!registerPasswordConfirmToggle.dataset.listenerAdded) {
+                registerPasswordConfirmToggle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const input = registerPasswordConfirm;
+                    const icon = registerPasswordConfirmToggle.querySelector('i');
+                    if (!icon) return;
+                    
+                    if (input.type === 'password') {
+                        input.type = 'text';
+                        icon.className = 'fas fa-eye-slash';
+                    } else {
+                        input.type = 'password';
+                        icon.className = 'fas fa-eye';
+                    }
+                });
+                registerPasswordConfirmToggle.dataset.listenerAdded = 'true';
+            }
+            
+            // Prevent browser's default password reveal button - Add global style
+            if (!document.head.querySelector('#hide-browser-password-btn')) {
+                const hideBrowserPasswordBtn = document.createElement('style');
+                hideBrowserPasswordBtn.id = 'hide-browser-password-btn';
+                hideBrowserPasswordBtn.textContent = `
+                    /* Hide Chrome/Edge/Safari password reveal button - Global */
+                    input[type="password"]::-webkit-credentials-auto-fill-button,
+                    input[type="password"]::-webkit-strong-password-auto-fill-button,
+                    input[type="password"]::-webkit-textfield-decoration-container,
+                    input[data-form-type="password"]::-webkit-credentials-auto-fill-button,
+                    input[data-form-type="password"]::-webkit-strong-password-auto-fill-button,
+                    input[data-form-type="password"]::-webkit-textfield-decoration-container {
+                        display: none !important;
+                        visibility: hidden !important;
+                        opacity: 0 !important;
+                        pointer-events: none !important;
+                        width: 0 !important;
+                        height: 0 !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
+                        position: absolute !important;
+                        left: -9999px !important;
+                        clip: rect(0, 0, 0, 0) !important;
+                    }
+                    
+                    /* Hide Firefox password reveal button */
+                    input[type="password"]::-moz-textfield-decoration-container,
+                    input[data-form-type="password"]::-moz-textfield-decoration-container {
+                        display: none !important;
+                    }
+                    
+                    /* Hide IE/Edge password reveal button */
+                    input[type="password"]::-ms-reveal,
+                    input[type="password"]::-ms-clear,
+                    input[data-form-type="password"]::-ms-reveal,
+                    input[data-form-type="password"]::-ms-clear {
+                        display: none !important;
+                        visibility: hidden !important;
+                        width: 0 !important;
+                        height: 0 !important;
+                        position: absolute !important;
+                        left: -9999px !important;
+                    }
+                `;
+                document.head.appendChild(hideBrowserPasswordBtn);
+            }
+            
+            // Force hide browser buttons on input events and use MutationObserver
+            [loginPassword, registerPassword, registerPasswordConfirm].forEach(input => {
+                // Hide on input
+                input.addEventListener('input', function() {
+                    this.style.setProperty('-webkit-text-security', 'disc', 'important');
+                    hideBrowserPasswordButton(this);
+                });
+                
+                // Hide on focus
+                input.addEventListener('focus', function() {
+                    this.style.setProperty('-webkit-text-security', 'disc', 'important');
+                    hideBrowserPasswordButton(this);
+                });
+                
+                // Hide on keydown
+                input.addEventListener('keydown', function() {
+                    this.style.setProperty('-webkit-text-security', 'disc', 'important');
+                    hideBrowserPasswordButton(this);
+                });
+                
+                // Use MutationObserver to watch for browser-added elements
+                const observer = new MutationObserver(function(mutations) {
+                    hideBrowserPasswordButton(input);
+                });
+                
+                observer.observe(input, {
+                    attributes: true,
+                    childList: true,
+                    subtree: true,
+                    attributeFilter: ['style', 'class']
+                });
+            });
+            
+            // Function to hide browser password reveal button
+            function hideBrowserPasswordButton(input) {
+                if (!input) return;
+                
+                // Force apply styles
+                const style = document.getElementById('hide-browser-password-btn');
+                if (style) {
+                    style.disabled = true;
+                    style.disabled = false;
+                }
+                
+                // Try to find and hide any reveal buttons
+                const parent = input.parentElement;
+                if (parent) {
+                    // Look for any buttons that might be browser-generated
+                    const buttons = parent.querySelectorAll('button, [role="button"]');
+                    buttons.forEach(btn => {
+                        if (btn.id && (btn.id.includes('password-toggle') || btn.id.includes('password-reveal'))) {
+                            // This is our custom button, keep it
+                            return;
+                        }
+                        // Check if it's a browser-generated button
+                        const rect = btn.getBoundingClientRect();
+                        if (rect.width < 30 && rect.height < 30) {
+                            // Small button, might be browser reveal button
+                            const inputRect = input.getBoundingClientRect();
+                            if (Math.abs(rect.right - inputRect.right) < 10) {
+                                // Button is near input right edge, hide it
+                                btn.style.display = 'none';
+                                btn.style.visibility = 'hidden';
+                                btn.style.opacity = '0';
+                                btn.style.width = '0';
+                                btn.style.height = '0';
+                            }
+                        }
+                    });
+                }
+            }
+            
+            // Initial hide on page load
+            setTimeout(() => {
+                [loginPassword, registerPassword, registerPasswordConfirm].forEach(input => {
+                    hideBrowserPasswordButton(input);
+                });
+            }, 100);
+            
+            // Clear form errors
+            function clearFormErrors() {
+                document.querySelectorAll('.input-error').forEach(el => {
+                    el.classList.remove('show');
+                    el.textContent = '';
+                });
+                document.querySelectorAll('.form-input').forEach(el => {
+                    el.classList.remove('error');
+                });
+            }
+            
+            // Show field error
+            function showFieldError(inputId, message) {
+                const input = document.getElementById(inputId);
+                const errorEl = document.getElementById(inputId + '-error');
+                input.classList.add('error');
+                errorEl.textContent = message;
+                errorEl.classList.add('show');
+            }
+            
+            // Validate register form
+            function validateRegisterForm() {
+                let isValid = true;
+                clearFormErrors();
+                
+                // Name validation
+                if (!registerName.value.trim()) {
+                    showFieldError('register-name', 'Nama lengkap wajib diisi');
+                    isValid = false;
+                }
+                
+                // Email validation
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!registerEmail.value.trim()) {
+                    showFieldError('register-email', 'Email wajib diisi');
+                    isValid = false;
+                } else if (!emailRegex.test(registerEmail.value)) {
+                    showFieldError('register-email', 'Format email tidak valid');
+                    isValid = false;
+                }
+                
+                // Password validation
+                if (!registerPassword.value) {
+                    showFieldError('register-password', 'Password wajib diisi');
+                    isValid = false;
+                } else if (registerPassword.value.length < 6) {
+                    showFieldError('register-password', 'Password minimal 6 karakter');
+                    isValid = false;
+                }
+                
+                // Password confirm validation
+                if (!registerPasswordConfirm.value) {
+                    showFieldError('register-password-confirm', 'Konfirmasi password wajib diisi');
+                    isValid = false;
+                } else if (registerPassword.value !== registerPasswordConfirm.value) {
+                    showFieldError('register-password-confirm', 'Password tidak cocok');
+                    isValid = false;
+                }
+                
+                return isValid;
+            }
+            
+            // Login form submission
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                clearFormErrors();
+                errorMessage.classList.remove('show');
+                
+                loginSubmitBtn.disabled = true;
+                loginSubmitBtn.classList.add('loading');
+                
+                try {
+                    const { signInWithEmailPassword } = await import('./firebase-auth.js');
+                    await signInWithEmailPassword(loginEmail.value, loginPassword.value);
+                    window.location.href = 'dashboard.html';
+                } catch (error) {
+                    console.error('Login error:', error);
+                    let errorMsg = 'Gagal masuk. Silakan coba lagi.';
+                    
+                    if (error.code === 'auth/user-not-found') {
+                        errorMsg = 'Email tidak terdaftar';
+                    } else if (error.code === 'auth/wrong-password') {
+                        errorMsg = 'Password salah';
+                    } else if (error.code === 'auth/invalid-email') {
+                        errorMsg = 'Format email tidak valid';
+                    } else if (error.code === 'auth/user-disabled') {
+                        errorMsg = 'Akun ini telah dinonaktifkan';
+                    } else if (error.message) {
+                        errorMsg = error.message;
+                    }
+                    
+                    errorMessage.textContent = errorMsg;
+                    errorMessage.classList.add('show');
+                } finally {
+                    loginSubmitBtn.disabled = false;
+                    loginSubmitBtn.classList.remove('loading');
+                }
+            });
+            
+            // Register form submission
+            registerForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                if (!validateRegisterForm()) {
+                    return;
+                }
+                
+                errorMessage.classList.remove('show');
+                
+                registerSubmitBtn.disabled = true;
+                registerSubmitBtn.classList.add('loading');
+                
+                try {
+                    const { createUserWithEmailPassword } = await import('./firebase-auth.js');
+                    await createUserWithEmailPassword(
+                        registerName.value.trim(),
+                        registerEmail.value.trim(),
+                        registerPassword.value
+                    );
+                    window.location.href = 'dashboard.html';
+                } catch (error) {
+                    console.error('Register error:', error);
+                    let errorMsg = 'Gagal mendaftar. Silakan coba lagi.';
+                    
+                    if (error.code === 'auth/email-already-in-use') {
+                        errorMsg = 'Email sudah terdaftar. Silakan gunakan email lain atau masuk.';
+                    } else if (error.code === 'auth/invalid-email') {
+                        errorMsg = 'Format email tidak valid';
+                    } else if (error.code === 'auth/weak-password') {
+                        errorMsg = 'Password terlalu lemah. Gunakan password yang lebih kuat.';
+                    } else if (error.message) {
+                        errorMsg = error.message;
+                    }
+                    
+                    errorMessage.textContent = errorMsg;
+                    errorMessage.classList.add('show');
+                } finally {
+                    registerSubmitBtn.disabled = false;
+                    registerSubmitBtn.classList.remove('loading');
+                }
+            });
+            
+            // Google sign in
+            googleSigninBtn.addEventListener('click', async () => {
+                googleSigninBtn.classList.add('loading');
+                googleSigninBtn.disabled = true;
+                errorMessage.classList.remove('show');
+                
+                try {
+                    const { signInWithGoogle } = await import('./firebase-auth.js');
+                    const user = await signInWithGoogle();
+                    
+                    if (user) {
+                        // Successfully signed in - redirect to dashboard
+                        console.log('Login successful, redirecting to dashboard...');
+                        window.location.href = 'dashboard.html';
+                    } else {
+                        throw new Error('Login gagal. User tidak ditemukan.');
+                    }
+                } catch (error) {
+                    console.error('Sign in error:', error);
+                    
+                    let errorMsg = 'Gagal masuk. Silakan coba lagi.';
+                    if (error.code === 'auth/popup-closed-by-user') {
+                        errorMsg = 'Login dibatalkan. Silakan coba lagi.';
+                    } else if (error.code === 'auth/popup-blocked') {
+                        errorMsg = 'Popup diblokir. Silakan izinkan popup dan coba lagi.';
+                    } else if (error.code === 'auth/network-request-failed') {
+                        errorMsg = 'Gagal terhubung ke server. Periksa koneksi internet Anda.';
+                    } else if (error.message) {
+                        errorMsg = error.message;
+                    }
+                    
+                    errorMessage.textContent = errorMsg;
+                    errorMessage.classList.add('show');
+                    
+                    googleSigninBtn.classList.remove('loading');
+                    googleSigninBtn.disabled = false;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
