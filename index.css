@@ -333,6 +333,7 @@ body::-webkit-scrollbar:vertical {
     margin: 0 auto;
     z-index: 1;
     animation: fadeInUp 0.8s ease;
+    padding-top: var(--spacing-md);
 }
 
 .hero-badge {
