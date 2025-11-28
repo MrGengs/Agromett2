@@ -33,10 +33,151 @@
         </header>
         
         <main>
+            <!-- Top Navigation Tabs -->
+            <div class="top-nav-tabs">
+                <button class="top-nav-tab active" data-tab="input-data">
+                    <i class="fas fa-database"></i>
+                    <span>Input Data</span>
+                </button>
+                <button class="top-nav-tab" data-tab="prediction">
+                    <i class="fas fa-calculator"></i>
+                    <span>Prediksi</span>
+                </button>
+            </div>
+            
             <!-- Input Data Section -->
-            <section id="input" class="section active">
+            <section id="input-data-section" class="section active">
+                <!-- Sub Navigation for Input Data -->
+                <div class="sub-nav-tabs">
+                    <button class="sub-nav-tab active" data-subtab="inventory">
+                        <i class="fas fa-boxes"></i>
+                        <span>Inventory</span>
+                    </button>
+                    <button class="sub-nav-tab" data-subtab="harvest">
+                        <i class="fas fa-wheat-awn"></i>
+                        <span>Hasil Panen</span>
+                    </button>
+                </div>
+                
+                <!-- Inventory Form -->
+                <div id="inventory-form" class="form-pane active">
+                    <div class="section-header">
+                        <h2>Inventory Bibit Tanaman</h2>
+                        <p>Catat bibit tanaman yang Anda miliki dan jumlahnya</p>
+                    </div>
+                    
+                    <div class="form-container">
+                        <form id="inventory-form-submit">
+                            <div class="form-group">
+                                <label for="seed-plant-type" class="form-label">
+                                    <i class="fas fa-seedling"></i>
+                                    Jenis Bibit Tanaman
+                                </label>
+                                <input type="text" id="seed-plant-type" class="form-input" placeholder="Contoh: Stroberi, Padi, Tomat" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="seed-quantity" class="form-label">
+                                    <i class="fas fa-hashtag"></i>
+                                    Jumlah Bibit
+                                </label>
+                                <div class="input-with-unit">
+                                    <input type="number" id="seed-quantity" class="form-input" step="1" min="1" placeholder="0" required>
+                                    <span class="input-unit">bibit</span>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-save"></i>
+                                Simpan Inventory
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <!-- Inventory List -->
+                    <div class="inventory-list" id="inventory-list">
+                        <h3>Daftar Inventory</h3>
+                        <div id="inventory-items"></div>
+                    </div>
+                </div>
+                
+                <!-- Hasil Panen Form -->
+                <div id="harvest-form" class="form-pane">
+                    <div class="section-header">
+                        <h2>Input Hasil Panen</h2>
+                        <p>Catat hasil panen Anda dengan detail</p>
+                    </div>
+                    
+                    <div class="form-container">
+                        <form id="harvest-form-submit">
+                            <div class="form-group">
+                                <label for="harvest-plant-type" class="form-label">
+                                    <i class="fas fa-leaf"></i>
+                                    Jenis Tanaman
+                                </label>
+                                <input type="text" id="harvest-plant-type" class="form-input" placeholder="Contoh: Stroberi, Padi, Tomat" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="harvest-date" class="form-label">
+                                    <i class="fas fa-calendar"></i>
+                                    Tanggal Panen
+                                </label>
+                                <div class="date-input-group">
+                                    <select id="harvest-day" class="form-select" required>
+                                        <option value="" disabled selected>Tanggal</option>
+                                    </select>
+                                    <select id="harvest-month" class="form-select" required>
+                                        <option value="" disabled selected>Bulan</option>
+                                        <option value="1">Januari</option>
+                                        <option value="2">Februari</option>
+                                        <option value="3">Maret</option>
+                                        <option value="4">April</option>
+                                        <option value="5">Mei</option>
+                                        <option value="6">Juni</option>
+                                        <option value="7">Juli</option>
+                                        <option value="8">Agustus</option>
+                                        <option value="9">September</option>
+                                        <option value="10">Oktober</option>
+                                        <option value="11">November</option>
+                                        <option value="12">Desember</option>
+                                    </select>
+                                    <select id="harvest-year" class="form-select" required>
+                                        <option value="" disabled selected>Tahun</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="harvest-yield" class="form-label">
+                                    <i class="fas fa-weight-hanging"></i>
+                                    Hasil Panen
+                                </label>
+                                <div class="input-with-unit">
+                                    <input type="number" id="harvest-yield" class="form-input" step="0.1" min="0.1" placeholder="0.0" required>
+                                    <span class="input-unit">ton/ha</span>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-save"></i>
+                                Simpan Hasil Panen
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <!-- Harvest List -->
+                    <div class="harvest-list" id="harvest-list">
+                        <h3>Riwayat Hasil Panen</h3>
+                        <div id="harvest-items"></div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Prediction Section -->
+            <section id="prediction-section" class="section">
                 <div class="section-header">
-                    <h2>Input Data Lahan</h2>
+                    <h2>Prediksi Produktivitas</h2>
                     <p>Masukkan data lahan untuk mendapatkan prediksi produktivitas</p>
                 </div>
                 
@@ -181,6 +322,12 @@
                 </div>
                 <span>Riwayat</span>
             </a>
+            <a href="device.html" class="nav-item">
+                <div class="nav-icon">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <span>Device</span>
+            </a>
             <a href="account.html" class="nav-item">
                 <div class="nav-icon">
                     <i class="fas fa-user"></i>
@@ -189,10 +336,6 @@
             </a>
         </nav>
         
-        <div class="connection-status" id="connection-status">
-            <i class="fas fa-wifi"></i>
-            <span>Terhubung ke Cloud AGROMETT</span>
-        </div>
     </div>
 
     <!-- Firebase SDK -->

@@ -379,22 +379,23 @@ export async function getRealtimeDatabase() {
     return realtimeDb;
 }
 
-// Subscribe to real-time weather data
+// Subscribe to real-time weather data from sensor/last
 export async function subscribeToWeatherData(callback) {
     try {
         await initFirebase();
         const { ref, onValue } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js");
         
-        const weatherRef = ref(realtimeDb, 'weather');
+        // Read from sensor/last path
+        const sensorRef = ref(realtimeDb, 'sensor/last');
         
         // Subscribe to changes
-        const unsubscribe = onValue(weatherRef, (snapshot) => {
+        const unsubscribe = onValue(sensorRef, (snapshot) => {
             const data = snapshot.val();
             if (data && callback) {
                 callback(data);
             }
         }, (error) => {
-            console.error('Error reading weather data:', error);
+            console.error('Error reading sensor data:', error);
             if (callback) {
                 callback(null, error);
             }
@@ -402,11 +403,141 @@ export async function subscribeToWeatherData(callback) {
         
         return unsubscribe;
     } catch (error) {
-        console.error('Error setting up weather subscription:', error);
+        console.error('Error setting up sensor subscription:', error);
+        throw error;
+    }
+}
+
+// Save inventory to Firestore (as subcollection in users collection)
+export async function saveInventoryToFirestore(userId, inventoryData) {
+    try {
+        await initFirebase();
+        const { collection, doc, addDoc, serverTimestamp } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js");
+        
+        // Prepare inventory data for Firestore
+        const inventoryRecord = {
+            plantType: inventoryData.plantType || '',
+            quantity: inventoryData.quantity || 0,
+            createdAt: serverTimestamp(),
+            updatedAt: serverTimestamp()
+        };
+        
+        // Save to subcollection: users/{userId}/inventory
+        const userRef = doc(db, 'users', userId);
+        const inventoryRef = collection(userRef, 'inventory');
+        const docRef = await addDoc(inventoryRef, inventoryRecord);
+        
+        console.log('Inventory saved to Firestore successfully:', docRef.id);
+        return docRef.id;
+    } catch (error) {
+        console.error('Error saving inventory to Firestore:', error);
+        throw error;
+    }
+}
+
+// Get user inventory from Firestore
+export async function getUserInventory(userId, limitCount = 100) {
+    try {
+        await initFirebase();
+        const firestoreModule = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js");
+        const { collection, doc, query, orderBy, limit, getDocs } = firestoreModule;
+        
+        // Get from subcollection: users/{userId}/inventory
+        const userRef = doc(db, 'users', userId);
+        const inventoryRef = collection(userRef, 'inventory');
+        const q = query(
+            inventoryRef,
+            orderBy('createdAt', 'desc'),
+            limit(limitCount)
+        );
+        
+        const querySnapshot = await getDocs(q);
+        const inventory = [];
+        
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            inventory.push({
+                id: doc.id,
+                ...data,
+                createdAt: data.createdAt?.toDate?.() || null,
+                updatedAt: data.updatedAt?.toDate?.() || null
+            });
+        });
+        
+        return inventory;
+    } catch (error) {
+        console.error('Error getting user inventory:', error);
+        throw error;
+    }
+}
+
+// Save harvest to Firestore (as subcollection in users collection)
+export async function saveHarvestToFirestore(userId, harvestData) {
+    try {
+        await initFirebase();
+        const { collection, doc, addDoc, serverTimestamp } = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js");
+        
+        // Prepare harvest data for Firestore
+        const harvestRecord = {
+            plantType: harvestData.plantType || '',
+            harvestDate: harvestData.harvestDate ? new Date(harvestData.harvestDate) : null,
+            yield: harvestData.yield || 0, // ton/ha
+            createdAt: serverTimestamp(),
+            updatedAt: serverTimestamp()
+        };
+        
+        // Save to subcollection: users/{userId}/harvests
+        const userRef = doc(db, 'users', userId);
+        const harvestsRef = collection(userRef, 'harvests');
+        const docRef = await addDoc(harvestsRef, harvestRecord);
+        
+        console.log('Harvest saved to Firestore successfully:', docRef.id);
+        return docRef.id;
+    } catch (error) {
+        console.error('Error saving harvest to Firestore:', error);
+        throw error;
+    }
+}
+
+// Get user harvests from Firestore
+export async function getUserHarvests(userId, limitCount = 100) {
+    try {
+        await initFirebase();
+        const firestoreModule = await import("https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js");
+        const { collection, doc, query, orderBy, limit, getDocs } = firestoreModule;
+        
+        // Get from subcollection: users/{userId}/harvests
+        const userRef = doc(db, 'users', userId);
+        const harvestsRef = collection(userRef, 'harvests');
+        const q = query(
+            harvestsRef,
+            orderBy('harvestDate', 'desc'),
+            limit(limitCount)
+        );
+        
+        const querySnapshot = await getDocs(q);
+        const harvests = [];
+        
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            harvests.push({
+                id: doc.id,
+                ...data,
+                createdAt: data.createdAt?.toDate?.() || null,
+                updatedAt: data.updatedAt?.toDate?.() || null,
+                harvestDate: data.harvestDate?.toDate?.() || null
+            });
+
+        });
+        
+        return harvests;
+    } catch (error) {
+        console.error('Error getting user harvests:', error);
         throw error;
     }
 }
 
 // Export functions for use in other modules
 export { initFirebase, getUserFromFirestore };
+
 

@@ -361,7 +361,7 @@ section#dashboard {
 }
 
 .section {
-    display: block;
+    display: none;
     animation: fadeIn 0.5s ease-in;
 }
 
@@ -879,6 +879,21 @@ section#dashboard .section-header {
     color: var(--primary);
     position: absolute;
     left: 0;
+}
+
+.loading-recommendation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    color: var(--gray);
+    font-size: 0.9em;
+}
+
+.loading-recommendation i {
+    font-size: 1.2em;
+    color: var(--primary);
 }
 
 .timeline {
@@ -1515,4 +1530,337 @@ footer::-webkit-scrollbar:vertical {
     display: none !important;
     width: 0 !important;
     visibility: hidden !important;
+}
+
+/* Top Navigation Tabs */
+.top-nav-tabs {
+    display: flex;
+    background: white;
+    border-bottom: 2px solid var(--light);
+    margin: 0 -20px 20px -20px;
+    padding: 0 20px;
+}
+
+.top-nav-tab {
+    flex: 1;
+    padding: 15px 20px;
+    background: none;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--gray);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+}
+
+.top-nav-tab:hover {
+    color: var(--primary);
+    background: rgba(46, 125, 50, 0.05);
+}
+
+.top-nav-tab.active {
+    color: var(--primary);
+}
+
+.top-nav-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--primary);
+}
+
+/* Sub Navigation Tabs */
+.sub-nav-tabs {
+    display: flex;
+    background: var(--light);
+    border-radius: var(--border-radius-sm);
+    padding: 5px;
+    margin-bottom: 20px;
+    gap: 5px;
+}
+
+.sub-nav-tab {
+    flex: 1;
+    padding: 12px 20px;
+    background: transparent;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gray);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: var(--border-radius-sm);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+}
+
+.sub-nav-tab:hover {
+    color: var(--primary);
+    background: rgba(46, 125, 50, 0.1);
+}
+
+.sub-nav-tab.active {
+    color: var(--primary);
+    background: white;
+    box-shadow: var(--shadow-sm);
+}
+
+/* Form Pane */
+.form-pane {
+    display: none;
+}
+
+.form-pane.active {
+    display: block;
+    animation: fadeIn 0.3s ease-in;
+}
+
+/* Date Input Group */
+.date-input-group {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 10px;
+}
+
+/* Inventory List */
+.inventory-list,
+.harvest-list {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid var(--light);
+}
+
+.inventory-list h3,
+.harvest-list h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 15px;
+}
+
+#inventory-items,
+#harvest-items {
+    display: grid;
+    gap: 12px;
+}
+
+.inventory-item,
+.harvest-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: white;
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+}
+
+.inventory-item:hover,
+.harvest-item:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.inventory-item-icon,
+.harvest-item-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.inventory-item-content,
+.harvest-item-content {
+    flex: 1;
+}
+
+.inventory-item-name,
+.harvest-item-plant {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 5px;
+}
+
+.inventory-item-quantity {
+    font-size: 14px;
+    color: var(--gray);
+}
+
+.harvest-item-date {
+    font-size: 14px;
+    color: var(--gray);
+    margin-bottom: 5px;
+}
+
+.harvest-item-yield {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+/* Harvest Stats for History Page */
+.harvest-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.stat-comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .stat-comparison {
+        grid-template-columns: 1fr;
+    }
+}
+
+.comparison-card {
+    background: white;
+    padding: 20px;
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+}
+
+.comparison-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+.comparison-label {
+    font-size: 14px;
+    color: var(--gray);
+    margin-bottom: 8px;
+}
+
+.comparison-trend {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.comparison-trend.up {
+    color: #4caf50;
+    background: rgba(76, 175, 80, 0.1);
+}
+
+.comparison-trend.down {
+    color: #f44336;
+    background: rgba(244, 67, 54, 0.1);
+}
+
+.comparison-trend.stable {
+    color: var(--gray);
+    background: rgba(108, 117, 125, 0.1);
+}
+
+.yield-chart {
+    background: white;
+    padding: 20px;
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 20px;
+    position: relative;
+    min-height: 300px;
+}
+
+.yield-chart canvas {
+    max-height: 400px !important;
+    min-height: 250px !important;
+    height: 300px !important;
+    width: 100% !important;
+}
+
+.yield-chart .chart-header {
+    margin-bottom: 15px;
+}
+
+.yield-chart .chart-header h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.harvest-table {
+    background: white;
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+
+.harvest-table .table-header {
+    padding: 15px 20px;
+    border-bottom: 2px solid var(--light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.harvest-table .table-header h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--dark);
+    margin: 0;
+}
+
+.harvest-table .table-container {
+    overflow-x: auto;
+}
+
+.harvest-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.harvest-table table thead {
+    background: var(--light);
+}
+
+.harvest-table table th {
+    padding: 12px 20px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--dark);
+    font-size: 14px;
+}
+
+.harvest-table table td {
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--light);
+    color: var(--dark);
+    font-size: 14px;
+}
+
+.harvest-table table tbody tr:hover {
+    background: rgba(46, 125, 50, 0.05);
+}
+
+.harvest-table table tbody tr:last-child td {
+    border-bottom: none;
 }

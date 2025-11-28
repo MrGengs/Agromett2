@@ -7,6 +7,202 @@
     <link rel="icon" type="image/png" href="image/logo1x1.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .stats-header {
+            margin-bottom: 25px;
+        }
+        
+        .stats-header h3 {
+            font-size: 20px;
+            color: var(--dark);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .stats-header h3 i {
+            color: var(--primary);
+        }
+        
+        .stats-header p {
+            color: var(--gray);
+            font-size: 14px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .stat-card-primary::before {
+            background: linear-gradient(135deg, #2196f3, #03a9f4);
+        }
+        
+        .stat-card-success::before {
+            background: linear-gradient(135deg, #4caf50, #8bc34a);
+        }
+        
+        .stat-card-info::before {
+            background: linear-gradient(135deg, #00bcd4, #0097a7);
+        }
+        
+        .stat-card-warning::before {
+            background: linear-gradient(135deg, #ffc107, #ff9800);
+        }
+        
+        .stat-card-purple::before {
+            background: linear-gradient(135deg, #9c27b0, #7b1fa2);
+        }
+        
+        .stat-card-danger::before {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+        }
+        
+        .stat-card-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .stat-card-primary .stat-card-icon {
+            background: linear-gradient(135deg, #2196f3, #03a9f4);
+        }
+        
+        .stat-card-success .stat-card-icon {
+            background: linear-gradient(135deg, #4caf50, #8bc34a);
+        }
+        
+        .stat-card-info .stat-card-icon {
+            background: linear-gradient(135deg, #00bcd4, #0097a7);
+        }
+        
+        .stat-card-warning .stat-card-icon {
+            background: linear-gradient(135deg, #ffc107, #ff9800);
+        }
+        
+        .stat-card-purple .stat-card-icon {
+            background: linear-gradient(135deg, #9c27b0, #7b1fa2);
+        }
+        
+        .stat-card-danger .stat-card-icon {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+        }
+        
+        .stat-card-content {
+            flex: 1;
+        }
+        
+        .stat-card-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 5px;
+            line-height: 1.2;
+        }
+        
+        .stat-card-label {
+            font-size: 13px;
+            color: var(--gray);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        .stat-card-progress {
+            width: 100%;
+            height: 6px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+        
+        .stat-progress-bar {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.8s ease;
+        }
+        
+        .stat-card-primary .stat-progress-bar {
+            background: linear-gradient(135deg, #2196f3, #03a9f4);
+        }
+        
+        .stat-card-success .stat-progress-bar {
+            background: linear-gradient(135deg, #4caf50, #8bc34a);
+        }
+        
+        .stat-card-info .stat-progress-bar {
+            background: linear-gradient(135deg, #00bcd4, #0097a7);
+        }
+        
+        .stat-card-warning .stat-progress-bar {
+            background: linear-gradient(135deg, #ffc107, #ff9800);
+        }
+        
+        .stat-card-purple .stat-progress-bar {
+            background: linear-gradient(135deg, #9c27b0, #7b1fa2);
+        }
+        
+        .stat-card-danger .stat-progress-bar {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+        }
+        
+        .stat-card-subtext {
+            font-size: 11px;
+            color: var(--gray);
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .stat-card {
+                padding: 15px;
+            }
+            
+            .stat-card-value {
+                font-size: 24px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="app-container">
@@ -56,25 +252,93 @@
                     </div>
                     
                     <div class="account-details">
-                        <div class="detail-card">
-                            <div class="detail-header">
-                                <div class="detail-icon">
-                                    <i class="fas fa-chart-bar"></i>
+                        <div class="stats-header">
+                            <h3><i class="fas fa-chart-line"></i> Statistik Aktivitas</h3>
+                            <p>Ringkasan performa dan aktivitas Anda</p>
+                        </div>
+                        
+                        <div class="stats-grid">
+                            <div class="stat-card stat-card-primary">
+                                <div class="stat-card-icon">
+                                    <i class="fas fa-seedling"></i>
                                 </div>
-                                <h4>Statistik</h4>
+                                <div class="stat-card-content">
+                                    <div class="stat-card-value" id="stat-data-input">12</div>
+                                    <div class="stat-card-label">Catatan Lahan</div>
+                                    <div class="stat-card-progress">
+                                        <div class="stat-progress-bar" style="width: 60%"></div>
+                                    </div>
+                                    <div class="stat-card-subtext">Target: 20 catatan</div>
+                                </div>
                             </div>
-                            <div class="detail-content">
-                                <div class="detail-item">
-                                    <span class="detail-label">Total Data Input</span>
-                                    <span class="detail-value">12</span>
+                            
+                            <div class="stat-card stat-card-success">
+                                <div class="stat-card-icon">
+                                    <i class="fas fa-lightbulb"></i>
                                 </div>
-                                <div class="detail-item">
-                                    <span class="detail-label">Rekomendasi Diterima</span>
-                                    <span class="detail-value">8</span>
+                                <div class="stat-card-content">
+                                    <div class="stat-card-value" id="stat-recommendations">8</div>
+                                    <div class="stat-card-label">Tips Diterapkan</div>
+                                    <div class="stat-card-progress">
+                                        <div class="stat-progress-bar" style="width: 80%"></div>
+                                    </div>
+                                    <div class="stat-card-subtext">67% tips digunakan</div>
                                 </div>
-                                <div class="detail-item">
-                                    <span class="detail-label">Lahan Terdaftar</span>
-                                    <span class="detail-value">3</span>
+                            </div>
+                            
+                            <div class="stat-card stat-card-info">
+                                <div class="stat-card-icon">
+                                    <i class="fas fa-map-marked-alt"></i>
+                                </div>
+                                <div class="stat-card-content">
+                                    <div class="stat-card-value" id="stat-land">3</div>
+                                    <div class="stat-card-label">Lahan Aktif</div>
+                                    <div class="stat-card-progress">
+                                        <div class="stat-progress-bar" style="width: 75%"></div>
+                                    </div>
+                                    <div class="stat-card-subtext">Total: 4 hektar</div>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-card stat-card-warning">
+                                <div class="stat-card-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="stat-card-content">
+                                    <div class="stat-card-value" id="stat-productivity">+28%</div>
+                                    <div class="stat-card-label">Produktivitas</div>
+                                    <div class="stat-card-progress">
+                                        <div class="stat-progress-bar" style="width: 28%"></div>
+                                    </div>
+                                    <div class="stat-card-subtext">Naik dari bulan lalu</div>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-card stat-card-purple">
+                                <div class="stat-card-icon">
+                                    <i class="fas fa-microchip"></i>
+                                </div>
+                                <div class="stat-card-content">
+                                    <div class="stat-card-value" id="stat-devices">10</div>
+                                    <div class="stat-card-label">Device Aktif</div>
+                                    <div class="stat-card-progress">
+                                        <div class="stat-progress-bar" style="width: 83%"></div>
+                                    </div>
+                                    <div class="stat-card-subtext">83% online</div>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-card stat-card-danger">
+                                <div class="stat-card-icon">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                                <div class="stat-card-content">
+                                    <div class="stat-card-value" id="stat-harvest">12</div>
+                                    <div class="stat-card-label">Panen Bulan Ini</div>
+                                    <div class="stat-card-progress">
+                                        <div class="stat-progress-bar" style="width: 100%"></div>
+                                    </div>
+                                    <div class="stat-card-subtext">Target tercapai!</div>
                                 </div>
                             </div>
                         </div>
@@ -115,6 +379,12 @@
                 </div>
                 <span>Riwayat</span>
             </a>
+            <a href="device.html" class="nav-item">
+                <div class="nav-icon">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <span>Device</span>
+            </a>
             <a href="account.html" class="nav-item active">
                 <div class="nav-icon">
                     <i class="fas fa-user"></i>
@@ -122,11 +392,6 @@
                 <span>Akun</span>
             </a>
         </nav>
-        
-        <div class="connection-status" id="connection-status">
-            <i class="fas fa-wifi"></i>
-            <span>Terhubung ke Cloud AGROMETT</span>
-        </div>
     </div>
 
     <!-- Firebase SDK -->
